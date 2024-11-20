@@ -3,6 +3,7 @@ import Footer from "@/components/footer/Footer";
 import Header from "@/components/header/Header";
 import Image from "next/image";
 import styles from "./page.module.css";
+import Info from "@/components/Info";
 
 export default function Portfolio() {
 
@@ -32,6 +33,49 @@ export default function Portfolio() {
                 </g>
             </svg>
         </section>
+
+        <div id="gotoCompetences" className="goto"></div>
+        <section className={styles.competences}>
+            <h1 id="competences">Outils et Languages</h1>
+            <div>
+                <article>
+                    <h2>Programmation</h2>
+                    <ul>
+                        <li><Info href="https://www.python.org" src="/svg/python.svg" height={120} /></li>
+                        <li><Info href="https://learn.microsoft.com/fr-fr/cpp/c-language/?view=msvc-170" src="/svg/c.svg" /></li>
+                        <li><Info href="https://dev.java" src="/svg/java.svg" /></li>
+                        <li><Info href="https://developer.mozilla.org/fr/docs/Learn/JavaScript" src="/svg/javascript.svg" /></li>
+                        <li><Info href="https://developer.mozilla.org/fr/docs/Web/HTML" src="/svg/html.svg" /></li>
+                        <li><Info href="https://developer.mozilla.org/fr/docs/Web/CSS" src="/svg/css.svg" /></li>
+                    </ul>
+                </article>
+                <article>
+                    <h2>Conception</h2>
+                    <ul>
+                        <li><Info href="https://www.figma.com" src="/svg/figma.svg" /></li>
+                        <li><Info href="https://gluonhq.com/products/scene-builder/" src="/svg/scene_builder.svg" /></li>
+                        <li><Info href="https://www.uml.org" src="/svg/uml.svg" /></li>
+                        <li><Info href="https://www.visual-paradigm.com" src="/svg/visual-paradigm.svg" /></li>
+                    </ul>
+                </article>
+                <article>
+                    <h2>BDD</h2>
+                    <ul>
+                        <li><Info href="https://www.postgresql.org/docs/" src="/svg/postgresql.svg" /></li>
+                        <li><Info href="https://www.sqlite.org/index.html" src="/svg/sqlite.svg" /></li>
+                        <li><Info href="https://www.mysql.com/products/workbench/" src="/svg/sqlworkbench.svg" /></li>
+                    </ul>
+                </article>
+                <article>
+                    <h2>Système</h2>
+                    <ul>
+                        <li><Info href="https://git-scm.com" src="/svg/git.svg" /></li>
+                        <li><Info href="https://devdocs.io/bash/" src="/svg/bash.svg" /></li>
+                    </ul>         
+                </article>
+            </div> 
+        </section>
+
         <Footer />
         </>
     );

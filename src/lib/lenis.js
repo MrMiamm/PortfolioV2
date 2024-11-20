@@ -5,8 +5,9 @@ let lenis;
 export function initLenis() {
     if (!lenis) {
         lenis = new Lenis({
-            smooth: true,
-            // Configurez d'autres options ici si nécessaire
+            duration: 1.1,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            wheelMultiplier: 0.8
         });
 
         // Boucle d'animation
