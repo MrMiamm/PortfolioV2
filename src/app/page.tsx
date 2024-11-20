@@ -12,7 +12,7 @@ export default function Portfolio() {
         <div id={styles.bgGradient}></div>
         <Header />
         <section id={styles.accueil}> 
-            <Image src="/photo.webp" alt="Une photo de moi" width={500} height={500} />
+            <Image src="/img/photo.webp" alt="Une photo de moi" width={500} height={500} />
             <div id={styles.accueil_content}>
                 <div>
                     <p>William CHERON</p>
@@ -74,6 +74,30 @@ export default function Portfolio() {
                     </ul>         
                 </article>
             </div> 
+        </section>
+
+        <div id="gotoFormations" className="goto"></div>
+        <section className={styles.formations}>
+            <h1 id="formations">Formations</h1>
+            <div>
+                <article>
+                    <h2>BUT Informatique</h2>
+                    <div>
+                        <p>2022-20??
+                        <br />IUT de Lannion
+                        </p>
+                    </div>
+                </article>
+                <article>
+                    <h2>Baccalauréat Général</h2>
+                    <div>
+                        <p>2019-2022
+                        <br />Lycée Vauban - Brest
+                        <br />Spécialités: NSI (Numérique et Science Informatique) et Mathématiques
+                        </p>
+                    </div>
+                </article>
+            </div>
         </section>
 
         <Footer />
