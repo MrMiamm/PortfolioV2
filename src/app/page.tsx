@@ -12,7 +12,7 @@ export default function Portfolio() {
         <div id={styles.bgGradient}></div>
         <Header />
         <section id={styles.accueil}> 
-            <Image src="/img/photo.webp" alt="Une photo de moi" width={500} height={500} />
+            <Image src="/img/photo.webp" alt="Une photo de moi" width={500} height={500} priority />
             <div id={styles.accueil_content}>
                 <div>
                     <p>William CHERON</p>
