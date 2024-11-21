@@ -63,7 +63,7 @@ export default function Portfolio() {
                     <ul>
                         <li><Info href="https://www.postgresql.org/docs/" src="/svg/postgresql.svg" /></li>
                         <li><Info href="https://www.sqlite.org/index.html" src="/svg/sqlite.svg" /></li>
-                        <li><Info href="https://www.mysql.com/products/workbench/" src="/svg/sqlworkbench.svg" /></li>
+                        <li><Info href="https://www.mysql.com/products/workbench/" src="/svg/mysql-workbench.svg" /></li>
                     </ul>
                 </article>
                 <article>
