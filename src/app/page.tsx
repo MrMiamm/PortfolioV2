@@ -1,11 +1,80 @@
+"use client";
+
 import Button from "@/components/Button";
 import Footer from "@/components/footer/Footer";
 import Header from "@/components/header/Header";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Info from "@/components/Info";
+import { useEffect } from "react";
+import { checkAndAnimate } from "@/lib/animate";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function Portfolio() {
+
+    useEffect(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        /*******************************************************/
+        //Animations de l'accueil
+
+        //Boutons du menu
+        checkAndAnimate("#accueil_content > nav > ul", {
+            y: 20,
+            opacity: 0
+        }, {
+            y: 0,
+            opacity: 1,
+            stagger: 0.6,
+            duration: 1,
+            ease: "none"
+        });
+
+        checkAndAnimate(`#${styles.accueil} > img, #${styles.accueil} > div`, {}, {
+            scrollTrigger: {
+                trigger: `.${styles.competences}`,
+                scrub: true,
+                start: "-100 center",
+                end: "+=300 center"
+            },
+            y: -500,
+            ease: "none"
+        });
+
+        /*******************************************************/
+        //Animations des projets
+
+        checkAndAnimate(`.${styles.projet}`, {
+            scrollTrigger: {
+                trigger: `.${styles.projets}`,
+                scrub: true,
+                start: "top center",
+                end: "+=300 center"
+            },
+            opacity: 0,
+            stagger: 0.5,
+            clearProps:"all",
+            x: -15
+        });
+
+        /*******************************************************/
+        //Animations des compétences et formations
+
+        (gsap.utils.toArray(`.${styles.competences} article, .${styles.formations} article`) as HTMLElement[]).forEach((article: HTMLElement) => {
+            gsap.from(article, {
+                scrollTrigger: {
+                    trigger: article.parentNode as Element,
+                    scrub: true,
+                    start: "top-=10% center",
+                    end: "top+=15% center"
+                },
+                opacity: 0,
+                ease: "none"
+            });
+        });
+
+    }, []);
 
     return (
         <>
@@ -13,7 +82,7 @@ export default function Portfolio() {
         <Header />
         <section id={styles.accueil}> 
             <Image src="/img/photo.webp" alt="Une photo de moi" width={500} height={500} priority />
-            <div id={styles.accueil_content}>
+            <div id="accueil_content">
                 <div>
                     <p>William CHERON</p>
                     <p>Je suis étudiant en <a target="_blank" href="https://iut-lannion.univ-rennes.fr/informatique">BUT Informatique</a> à l'<a target="_blank" href="https://iut-lannion.univ-rennes.fr">IUT de Lannion</a>.<br />J'aime le codage et également jouer du piano.<br />À long terme, j'aimerais être développeur logiciel ou développeur Web FullStack !</p>

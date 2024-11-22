@@ -2,8 +2,25 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect } from "react";
+import { checkAndAnimate } from "@/lib/animate";
 
 export default function Footer() {
+
+    useEffect(() => {
+        checkAndAnimate("footer#contact > div", {
+            scrollTrigger: {
+              trigger: "#contact",
+              scrub: true,
+              start: "top-500 bottom",
+              end: "bottom bottom",
+            },
+            opacity: 0,
+            y: 150,
+            ease: "none"
+        });
+    }, []);
+
     return (
         <footer id="contact">
         <div>
