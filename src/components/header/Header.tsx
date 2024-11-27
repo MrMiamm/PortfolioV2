@@ -10,22 +10,40 @@ export default function Header() {
     useEffect(() => {
 
         const header = document.querySelector("header");
+        const headerBorder = document.createElement("div");
+        headerBorder.classList.add("header-border");
+        header?.appendChild(headerBorder);
+
         function addHeaderScrolledClass() {
             if (header) {
                 window.scrollY > 0 ? header.classList.add("scrolled") : header.classList.remove("scrolled");
             }
         }
+
+        function adaptHeaderBorderWidthWithScroll() {
+            if (header && headerBorder) {
+                const maxScroll = document.body.scrollHeight - window.innerHeight;
+                const scrollPercentage = window.scrollY / maxScroll;
+                headerBorder.style.width = `${scrollPercentage * 100}vw`;
+            }
+        }
+
+        function headerScrollEvent() {
+            addHeaderScrolledClass();
+            adaptHeaderBorderWidthWithScroll();
+        }
         
-        window.addEventListener("scroll", () => addHeaderScrolledClass());
+        window.addEventListener("scroll", () => headerScrollEvent());
         addHeaderScrolledClass();
+        adaptHeaderBorderWidthWithScroll();
 
         return () => {
-            window.removeEventListener("scroll", () => addHeaderScrolledClass());
+            window.removeEventListener("scroll", () => headerScrollEvent());
         };
     }, []);
 
     useEffect(() => {
-        // Handle closing burger menu when link is clicked
+        //Handle closing burger menu when link is clicked
         const toggle = document.getElementById("toggle");
         const navLinks = document.querySelectorAll(".pagelink");
         
@@ -59,6 +77,7 @@ export default function Header() {
                     <Image src="/svg/linkedin.svg" alt="Linkedin" width={24} height={24} />
                 </Link>
             </nav>
+            <div className="header-border"></div>
         </header>
         </>
     );

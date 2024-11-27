@@ -215,6 +215,17 @@ header{
     transition: ease-in all 500ms;
 }
 
+header .header-border {
+    width: 0vw;
+    transition: width 0.1s ease;
+    position: absolute;
+    z-index: 1;
+    height: 0.1vw;
+    background-color: var(--col1);
+    top: 100%;
+    left: 0;
+}
+
 header nav{
     width: fit-content;
 }
