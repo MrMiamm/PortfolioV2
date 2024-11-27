@@ -192,7 +192,7 @@ div.info{
     transform: translate(0%, -100%);
     color: #fff;
     mix-blend-mode: difference;
-    transition: opacity 0.5s;
+    transition: all 500ms;
     font-size: 32px;
     font-family: "NoirProLight", Arial, sans-serif;
     pointer-events: none;

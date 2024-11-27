@@ -52,8 +52,20 @@ function handleLinkHover(link, innerCursor, outerCursor, info, isHovered) {
     outerCursor.style.opacity = isHovered ? "0" : "1";
     
     if (link.classList.contains("info")) {
-        info.textContent = isHovered ? link.firstChild.alt : "";
-        info.style.opacity = isHovered ? "1" : "0";
+        const text = link.firstChild.alt
+        if (text) {
+            
+            if (info.textContent != "") {
+                info.style.opacity = "0";
+                setTimeout(() => {
+                    info.style.opacity = isHovered ? "1" : "0";
+                    info.textContent = text;
+                }, 200);
+            } else {
+                info.style.opacity = isHovered ? "1" : "0";
+                info.textContent = text;
+            }
+        }
     }
 }
 
