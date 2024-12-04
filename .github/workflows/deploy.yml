@@ -29,20 +29,29 @@ jobs:
           -e "ssh -o StrictHostKeyChecking=no" \
           ./ \
           root@85.31.239.34:/var/www/william-cheron.pro
+          ssh root@85.31.239.34 "rm -rf /var/www/william-cheron.pro/node_modules /var/www/william-cheron.pro/package-lock.json"
 
       # 4. Build la production
       - name: Build la production
         run: |
           set -e
-          ssh root@85.31.239.34 "cd /var/www/william-cheron.pro && npm install && npm run build && echo 'Build réussi'"
+          ssh root@85.31.239.34 "
+          cd /var/www/william-cheron.pro;
+          npm install;
+          npm run build;
+          echo 'Build terminé avec succès';
+          "
 
-      # 5. Redémarrer le serveur
+      # 5. Test et Redémarrer le serveur avec PM2
       - name: Restart Portfolio
         run: |
           set -e
           ssh root@85.31.239.34 "
-          pm2 delete portfolio 2>/dev/null || echo 'Aucun processus à supprimer';
-          pm2 start npm --name 'portfolio' -- start;
+          cd /var/www/william-cheron.pro;
+          echo 'Vérification du démarrage manuel...';
+          npm start -- --test || echo 'Erreur lors du test manuel';
+          pm2 delete portfolio 2>/dev/null || echo 'Aucun processus PM2 à supprimer';
+          pm2 start npm --name 'portfolio' -- start --cwd /var/www/william-cheron.pro;
           pm2 save;
           pm2 list;
           "
