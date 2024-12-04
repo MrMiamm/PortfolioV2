@@ -24,6 +24,7 @@ jobs:
       # 3. Copier les fichiers vers le serveur
       - name: Copier les fichiers
         run: |
+          set -e
           rsync -avz --delete \
           -e "ssh -o StrictHostKeyChecking=no" \
           ./ \
@@ -32,9 +33,16 @@ jobs:
       # 4. Build la production
       - name: Build la production
         run: |
-          ssh root@85.31.239.34 "cd /var/www/william-cheron.pro && npm install && npm run build"
-      
+          set -e
+          ssh root@85.31.239.34 "cd /var/www/william-cheron.pro && npm install && npm run build && echo 'Build réussi'"
+
       # 5. Redémarrer le serveur
       - name: Restart Portfolio
         run: |
-          ssh root@85.31.239.34 "pm2 delete portfolio || true && pm2 start npm --name 'portfolio' -- start && pm2 save"
+          set -e
+          ssh root@85.31.239.34 "
+          pm2 delete portfolio 2>/dev/null || echo 'Aucun processus à supprimer';
+          pm2 start npm --name 'portfolio' -- start;
+          pm2 save;
+          pm2 list;
+          "
