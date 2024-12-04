@@ -34,11 +34,10 @@ jobs:
       # 4. Build la production
       - name: Build la production
         run: |
-          set -e
-          ssh root@85.31.239.34 "
+          ssh -o ServerAliveInterval=30 root@85.31.239.34 "
           cd /var/www/william-cheron.pro;
-          npm install;
-          npm run build;
+          npm install > install.log 2>&1;
+          npm run build > build.log 2>&1;
           echo 'Build terminé avec succès';
           "
 
