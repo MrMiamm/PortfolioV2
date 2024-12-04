@@ -1,0 +1,40 @@
+name: Deploy to Server
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupérer le code source
+      - name: Récupérer le code source
+        uses: actions/checkout@v3
+
+      # 2. Mise en place de l'agent SSH
+      - name: Mise en place de l'agent SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # 3. Copier les fichiers vers le serveur
+      - name: Copier les fichiers
+        run: |
+          rsync -avz --delete \
+          -e "ssh -o StrictHostKeyChecking=no" \
+          ./ \
+          root@85.31.239.34:/var/www/william-cheron.pro
+
+      # 4. Build la production
+      - name: Build la production
+        run: |
+          ssh root@85.31.239.34 "cd /var/www/william-cheron.pro && npm install && npm run build"
+      
+      # 5. Redémarrer le serveur
+      - name: Restart Portfolio
+        run: |
+          ssh root@85.31.239.34 "pm2 delete portfolio || true && pm2 start npm --name 'portfolio' -- start && pm2 save"
