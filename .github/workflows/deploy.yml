@@ -47,10 +47,15 @@ jobs:
           set -e
           ssh root@85.31.239.34 "
           cd /var/www/william-cheron.pro;
-          echo 'Vérification du démarrage manuel...';
+          echo 'Vérification de package.json...';
+          if [ ! -f package.json ]; then
+            echo 'Erreur : package.json introuvable !';
+            exit 1;
+          fi;
+          echo 'Test de démarrage manuel...';
           npm start -- --test || echo 'Erreur lors du test manuel';
           pm2 delete portfolio 2>/dev/null || echo 'Aucun processus PM2 à supprimer';
-          pm2 start npm --name 'portfolio' -- start --cwd /var/www/william-cheron.pro;
+          pm2 start npm --name 'portfolio' -- start --prefix /var/www/william-cheron.pro;
           pm2 save;
           pm2 list;
           "
