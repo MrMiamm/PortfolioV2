@@ -1,13 +1,13 @@
 'use client';
 
-import { getLenis } from '@/lib/lenis';
+import { useLenis } from 'lenis/react';
 import Link from 'next/link';
 
 export default function NavLinks() {
 
+    const lenis = useLenis();
     const handleScroll = (target: string) => {
-        const lenis = getLenis();
-        lenis.scrollTo(target);
+        if (lenis) lenis.scrollTo(target);
     };
 
     return (

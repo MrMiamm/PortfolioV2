@@ -1,6 +1,6 @@
 "use client";
 
-import { getLenis } from "@/lib/lenis";
+import { useLenis } from "lenis/react";
 import Link from "next/link";
 
 interface ButtonProps {
@@ -12,6 +12,9 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ href, reverse = false, download = false, openInNewTab = false, children }) => {
+
+    const lenis = useLenis();
+
     return (
         <Link
             className={`see-button ${reverse ? "reverse" : ""}`}
@@ -21,8 +24,7 @@ const Button: React.FC<ButtonProps> = ({ href, reverse = false, download = false
             onClick={href.startsWith("#") ? (e) => {
                 e.preventDefault();
                 const targetElement = document.querySelector(href);
-                if (targetElement) {
-                    const lenis = getLenis();
+                if (targetElement && lenis) {
                     lenis.scrollTo(href);
                 }
             } : undefined}

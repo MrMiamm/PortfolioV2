@@ -3,13 +3,12 @@
 import { checkAndAnimate } from "@/lib/animate";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ReactLenis from "lenis/react";
 import { useEffect } from "react";
-import { initLenis } from "../lib/lenis";
 
 export default function ClientProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
-        initLenis();
         animationGlobales();
     }, []);
 
@@ -68,5 +67,5 @@ export default function ClientProvider({ children }: { children: React.ReactNode
         });
     }
 
-    return <>{children}</>;
+    return <ReactLenis root>{children}</ReactLenis>;
 }
