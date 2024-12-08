@@ -1,25 +1,35 @@
 import Lenis from 'lenis';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import gsap from 'gsap';
 
 let lenis;
 
 export function initLenis() {
     if (!lenis) {
         lenis = new Lenis({
-            smooth: 0.2,
+            smooth: true,
+            lerp: 0.1, // Ajustez selon vos besoins
         });
 
-        //Synchroniser Lenis avec ScrollTrigger
+        // Synchroniser Lenis avec ScrollTrigger
         lenis.on('scroll', () => {
             ScrollTrigger.update();
         });
 
-        //Boucle d'animation
+        // Boucle d'animation pour Lenis
         function raf(time) {
             lenis.raf(time);
             requestAnimationFrame(raf);
         }
-        requestAnimationFrame(raf);
+
+        //Vérifiez que le DOM est prêt avant de démarrer
+        if (document.readyState === 'complete') {
+            requestAnimationFrame(raf);
+        } else {
+            window.addEventListener('load', () => {
+                requestAnimationFrame(raf);
+            });
+        }
     }
     return lenis;
 }
