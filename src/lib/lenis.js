@@ -1,6 +1,5 @@
 import Lenis from 'lenis';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import gsap from 'gsap';
 
 let lenis;
 
